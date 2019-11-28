@@ -5,5 +5,5 @@ int main()
     ST_NODO *cabecera = NULL;
     cargarCrecimiento(&cabecera, PLANTAS); // Cargo las plantas en RAM (Lista)
     calcularFormulaC(&cabecera); // La fórmula C ya la tenía semi-calculada pero faltaba dividirla por los días del año
-    calcularMejoresFertilizantes(&cabecera, mejorFertilizante);
+    calcularMejoresFertilizantes(&cabecera, mejorFertilizante, FERTILIZANTES);
 }

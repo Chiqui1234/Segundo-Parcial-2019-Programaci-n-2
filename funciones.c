@@ -4,6 +4,14 @@
  * crecimiento.dat lo cargo en una lista y añado varios campos más.
  * fertilizantes.txt tiene que ser parseado pero no lo cargo en RAM, porque no hay restricciones de lectura :3
  */
+FILE *open(const char *nombre, const char *permiso)
+{
+    FILE *nuevoArchivo = fopen(nombre, permiso);
+    if(nuevoArchivo == NULL)
+        exit(EXIT_FAILURE);
+    return nuevoArchivo;
+}
+
 ST_NODO *crearNodo(ST_PLANTA aux)
 {
     ST_NODO *nuevoNodo = (ST_NODO*) malloc(sizeof(ST_NODO)); // Pido memoria para un nodo nuevo
@@ -20,7 +28,7 @@ void cargarCrecimiento(ST_NODO **cabecera, const char *nombre)
     fread(&aux, sizeof(ST_PLANTA), 1, crecimiento);
     while( !feof(crecimiento) )
     {
-        insertarOrdenadoSinDuplicarEdicionEzpezial(&cabecera, aux); // Si está duplicado, voy a aplicar la fórmula C entre el dato que ya tenía y el que estoy por insertar
+        insertarOrdenadoSinDuplicarEdicionEzpezial(cabecera, aux); // Si está duplicado, voy a aplicar la fórmula C entre el dato que ya tenía y el que estoy por insertar
         fread(&aux, sizeof(ST_PLANTA), 1, crecimiento);
     }
     return;
@@ -38,7 +46,7 @@ TIPO *obtenerTipoDePlanta(ST_NODO *cabecera, int id)
     while( aux->planta.idP != id && aux->ste != NULL )
         aux = aux->ste;
     
-    return aux->planta.idP == id?aux->planta.tipo:-1;
+    return aux->planta.tipo;
 }
 
 ST_NODO *insertarOrdenado(ST_NODO **cabecera, ST_PLANTA dato)
@@ -91,7 +99,7 @@ void calcularMejoresFertilizantes(ST_NODO **cabecera, ST_FERTILIZANTE mejorFerti
     }
 }
 
-float calcularFormulaC(ST_NODO **cabecera)
+void calcularFormulaC(ST_NODO **cabecera)
 {
     ST_NODO *aux = *cabecera;
     int primerAltura = 0, ultimaAltura = 0;
@@ -100,4 +108,12 @@ float calcularFormulaC(ST_NODO **cabecera)
         aux->formulaC = aux->formulaC/365;
         aux = aux->ste;
     }
+}
+
+BIN_FERTILIZANTE obtenerFertilizante(int id, const char *nombre)
+{
+    // Me falta hacer esta función, si c:
+    // Básicamente, parsea y busca el fertilizante por id hasta que lo encuentra
+    BIN_FERTILIZANTE aux;
+    return aux;
 }

@@ -69,8 +69,12 @@ typedef enum tipoDePlanta // Este tipo de dato se creó para que *obtenerTipoDeP
 ST_NODO *crearNodo(ST_PLANTA aux);
 ST_NODO *insertarOrdenadoSinDuplicarEdicionEzpezial(ST_NODO **cabecera, ST_PLANTA dato); // Del binario a una lista única
 
+// Funciones de archivos
+FILE *open(const char *nombre, const char *permiso);
+
 // Funciones
 void cargarCrecimiento(ST_NODO **cabecera, const char *nombre);
 TIPO *obtenerTipoDePlanta(ST_NODO *cabecera, int id); // Cuándo encuentra la planta buscada, devuelve su tipo
 void calcularMejoresFertilizantes(ST_NODO **cabecera, ST_FERTILIZANTE mejorFertilizante[], const char *archivoFertilizantes); // Esta función recorre mi cabecera y por cada planta que lee compara el récord que hay para "formulaC" y, si es mayor que el récord, se lo guarda. 
-BIN_FERTILIZANTE obtenerFertilizante(ST_NODO *cabecera, int id); // Parsea y devuelve el fertilizante, que se busca por ID
+BIN_FERTILIZANTE obtenerFertilizante(int id, const char *nombre); // Parsea y devuelve el fertilizante, que se busca por ID
+void calcularFormulaC(ST_NODO **cabecera);
