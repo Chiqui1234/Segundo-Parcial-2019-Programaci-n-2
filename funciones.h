@@ -27,11 +27,11 @@
  * Restricciones / Consideraciones: 1 mes = 30 días y 1 año = 365 días. crecimiento.dat está completo y ambos binarios se pueden recorrer secuencialmente una vez. Nodo de hasta 20 bytes, memoria estática de hasta 15 bytes.
  */
 
-typedef struct planta
+typedef struct planta // Igual a plantas.dat, pero sin fecha (sólo ordeno por ID de Planta)
 {
     short int idP;          // id planta
     short int idF;          // id fertilizante
-    short int cantidadF;    // cantidad fertilizante
+    short int cantidadF;    // cantidad fertilizante (mililitros)
     short int altura;
     char tipo;              // A, T, O
 } ST_PLANTA; // 8 bytes
@@ -43,13 +43,13 @@ typedef struct nodoPlantas
     struct nodoPlantas *ste;
 } ST_NODO; // 16 bytes
 
-typedef struct mejorFertilizante
+typedef struct mejorFertilizante // La uso para guardar los récords de los mejores fertilizantes (de los 3 tipos de planta)
 {
     int id;
     float formulaC; // El mejor fertilizante es el que tiene mayor "Fórmula C"
 } ST_FERTILIZANTE;
 
-typedef struct fertilizante
+typedef struct fertilizante // Me sirve para parsear fertilizante.txt
 {
     short int id;
     char nombre[NOMBRE_SIZE];
@@ -58,7 +58,7 @@ typedef struct fertilizante
     char tipo; // N (Natural) ó Q (Químico)
 } BIN_FERTILIZANTE;
 
-typedef enum tipoDePlanta
+typedef enum tipoDePlanta // Este tipo de dato se creó para que *obtenerTipoDePlanta devuelva un número en vez de una letra. Siendo que el tipo de planta A se guarda en la celda 0 de un vector, T en la celda 1 y la O en la celda dos
 {
     A = 0,
     T = 1,
